@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="template.xhtml">
+
+	<ui:define name="header">
+		<h2>Desarrollo de Aplicaciones Cliente-Servidor</h2>
+	</ui:define>
+    <ui:define name="content">
+		<h:dataTable value="#{clienteBean.clientes}" var="cliente">
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+				<h:outputText value="#{cliente.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">DNI</f:facet>
+				<h:outputText value="#{cliente.dni}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nombre</f:facet>
+				<h:outputText value="#{cliente.nombre}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Apellido</f:facet>
+				<h:outputText value="#{cliente.apellido}" />
+			</h:column>
+		</h:dataTable>
+		
+		<h:link outcome="create.xhtml" value="Crear cliente"/>
+    </ui:define>
+</ui:composition>

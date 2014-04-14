@@ -26,9 +26,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
 
 /**
  * Representa un cliente en la aplicaci&oacute;n.
@@ -54,27 +60,33 @@ public class Cliente implements Serializable {
     @Column(name = "id")
     private Long id;
 
+	@NotNull
+	@Min(0)
+    @Column(name = "dni", nullable = false)
+    private Long dni;
+
     @NotNull
     @Size(min = 2, max = 50)
-    @Column(name = "nombre")
+    @Column(name = "nombre", length = 50, nullable = false)
     private String nombre;
     
     @NotNull
     @Size(min = 2, max = 50)
-    @Column(name = "apellido")
+    @Column(name = "apellido", length = 50, nullable = false)
     private String apellido;
     
     @NotNull
     @Past
-    @Column(name = "fecha_nacimiento")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "fecha_nacimiento", nullable = false)
     private Date fechaNacimiento;
     
     @Size(max = 20)
-    @Column(name = "telefono")
+    @Column(name = "telefono", length = 20)
     private String telefono;
     
     @Size(max = 50)
-    @Column(name = "direccion")
+    @Column(name = "direccion", length = 50)
     private String direccion;
 
     // Constructors -----------------------------------------------------------
@@ -89,6 +101,14 @@ public class Cliente implements Serializable {
 		this.id = id;
 	}
 
+	public Long getDni() {
+		return dni;
+	}
+
+	public void setDni(Long dni) {
+		this.dni = dni;
+	}
+    
 	public String getNombre() {
 		return nombre;
 	}
@@ -161,5 +181,23 @@ public class Cliente implements Serializable {
 		return "Cliente [id=" + id + ", nombre=" + nombre + ", apellido="
 				+ apellido + "]";
 	}
-    
+	
+	// Actions ----------------------------------------------------------------
+	
+	/**
+	 * Retorna la edad del cliente en base a la fecha de nacimiento y la 
+	 * fecha actual.
+	 * @return Edad del Cliente.
+	 */
+	public int getEdad() {
+		if(fechaNacimiento == null)
+			return 0;
+		
+		LocalDate birthdate = new LocalDate (fechaNacimiento.getTime());
+		LocalDate now = new LocalDate();
+		Years age = Years.yearsBetween(birthdate, now);
+		
+		return age.getYears();
+	}
+
 }
