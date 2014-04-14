@@ -14,35 +14,35 @@
         <h:form>
             <h:panelGrid columns="3">
                 <h:outputLabel for="dni">DNI:</h:outputLabel>
-                <h:inputText id="dni" value="#{cliente.dni}" />
+                <h:inputText id="dni" value="#{nuevoCliente.dni}" />
                 <h:message for="dni" />
 
                 <h:outputLabel for="nombre">Nombres:</h:outputLabel>
-                <h:inputText id="nombre" value="#{cliente.nombre}" />
+                <h:inputText id="nombre" value="#{nuevoCliente.nombre}" />
                 <h:message for="nombre" />
 
                 <h:outputLabel for="apellido">Apellido:</h:outputLabel>
-                <h:inputText id="apellido" value="#{cliente.apellido}" />
+                <h:inputText id="apellido" value="#{nuevoCliente.apellido}" />
                 <h:message for="apellido" />
 
                 <h:outputLabel for="fechaNacimiento">Fecha de Nacimiento:</h:outputLabel>
                 <h:inputText id="fechaNacimiento" 
-                	value="#{cliente.fechaNacimiento}">
+                	value="#{nuevoCliente.fechaNacimiento}">
                 	<f:convertDateTime pattern="dd/MM/yyyy"/>	
                 </h:inputText>
                 <h:message for="fechaNacimiento" />
 
                 <h:outputLabel for="telefono">Teléfono:</h:outputLabel>
-                <h:inputText id="telefono" value="#{cliente.telefono}" />
+                <h:inputText id="telefono" value="#{nuevoCliente.telefono}" />
                 <h:message for="telefono" />
 
                 <h:outputLabel for="direccion">Dirección:</h:outputLabel>
-                <h:inputText id="direccion" value="#{cliente.direccion}" />
+                <h:inputText id="direccion" value="#{nuevoCliente.direccion}" />
                 <h:message for="direccion" />
             </h:panelGrid>
 
             <h:commandButton 
-            	action="#{createClienteBean.create}"
+            	action="#{clienteBean.create}"
                 value="Agregar Cliente" />
         </h:form>
     </ui:define>
