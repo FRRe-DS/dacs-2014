@@ -18,10 +18,14 @@
 package ar.edu.utn.frre.dacs.sample.web;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Model;
+import javax.enterprise.inject.Produces;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import ar.edu.utn.frre.dacs.sample.dao.ClienteDao;
 import ar.edu.utn.frre.dacs.sample.model.Cliente;
@@ -33,28 +37,39 @@ import ar.edu.utn.frre.dacs.sample.model.Cliente;
  * @since 1.0.0
  */
 @Model
-public class ClienteBean implements Serializable {
+public class CreateClienteBean implements Serializable {
 
 	// Constants --------------------------------------------------------------
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	// Properties -------------------------------------------------------------
+	
+    @Named
+    @Produces
+    @RequestScoped
+    private Cliente cliente = new Cliente(); 
 
 	// Dependencies -----------------------------------------------------------
 	
-	@Inject
+    @Inject
+    private FacesContext facesContext;
+
+    @Inject
 	private ClienteDao clienteDao;
-	
+
 	// Getters/Setters --------------------------------------------------------
 	
-	public List<Cliente> getClientes() {
-		return clienteDao.findAll();
-	}
-	
 	// Actions ----------------------------------------------------------------
-		
+	
+    public void create() {
+    	clienteDao.create(cliente);
+        String message = String.format("Se ha creado el cliente con DNI: %d exitosamente.", cliente.getDni()); 
+        facesContext.addMessage(null, new FacesMessage(message));
+        this.cliente = new Cliente();
+    }
+
 }

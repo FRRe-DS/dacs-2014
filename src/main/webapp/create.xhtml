@@ -1,31 +1,49 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core">
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="template.xhtml">
 
-<ui:composition template="template.xhtml">
+	<ui:define name="header">
+		<h2>Desarrollo de Aplicaciones Cliente-Servidor</h2>
+		<h3>Crear Cliente</h3>
+	</ui:define>
     <ui:define name="content">
         <h:messages />
         <h:form>
             <h:panelGrid columns="3">
-                <h:outputLabel for="username">Enter username:</h:outputLabel>
-                <h:inputText id="username" value="#{newUser.username}" />
-                <h:message for="username" />
+                <h:outputLabel for="dni">DNI:</h:outputLabel>
+                <h:inputText id="dni" value="#{cliente.dni}" />
+                <h:message for="dni" />
 
-                <h:outputLabel for="firstName">Enter first name:</h:outputLabel>
-                <h:inputText id="firstName" value="#{newUser.firstName}" />
-                <h:message for="firstName" />
+                <h:outputLabel for="nombre">Nombres:</h:outputLabel>
+                <h:inputText id="nombre" value="#{cliente.nombre}" />
+                <h:message for="nombre" />
 
-                <h:outputLabel for="lastName">Enter last name:</h:outputLabel>
-                <h:inputText id="lastName" value="#{newUser.lastName}" />
-                <h:message for="lastName" />
+                <h:outputLabel for="apellido">Apellido:</h:outputLabel>
+                <h:inputText id="apellido" value="#{cliente.apellido}" />
+                <h:message for="apellido" />
 
+                <h:outputLabel for="fechaNacimiento">Fecha de Nacimiento:</h:outputLabel>
+                <h:inputText id="fechaNacimiento" 
+                	value="#{cliente.fechaNacimiento}">
+                	<f:convertDateTime pattern="dd/MM/yyyy"/>	
+                </h:inputText>
+                <h:message for="fechaNacimiento" />
+
+                <h:outputLabel for="telefono">Teléfono:</h:outputLabel>
+                <h:inputText id="telefono" value="#{cliente.telefono}" />
+                <h:message for="telefono" />
+
+                <h:outputLabel for="direccion">Dirección:</h:outputLabel>
+                <h:inputText id="direccion" value="#{cliente.direccion}" />
+                <h:message for="direccion" />
             </h:panelGrid>
-            <h:commandButton action="#{createController.create}"
-                value="Add User" />
+
+            <h:commandButton 
+            	action="#{createClienteBean.create}"
+                value="Agregar Cliente" />
         </h:form>
-        <h:link outcome="/greet.xhtml">Greet a user!</h:link>
     </ui:define>
 </ui:composition>
-</html>
