@@ -9,7 +9,7 @@
 		<h2>Desarrollo de Aplicaciones Cliente-Servidor</h2>
 	</ui:define>
     <ui:define name="content">
-		<h:dataTable value="#{listaClientes}" var="cliente">
+		<h:dataTable value="#{clienteBean.clientes}" var="cliente">
 			<h:column>
 				<f:facet name="header">Id</f:facet>
 				<h:outputText value="#{cliente.id}" />

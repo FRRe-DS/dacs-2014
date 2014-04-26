@@ -30,6 +30,8 @@ import javax.inject.Named;
 
 import ar.edu.utn.frre.dacs.sample.dao.ClienteDao;
 import ar.edu.utn.frre.dacs.sample.model.Cliente;
+import ar.edu.utn.frre.dacs.sample.services.ClienteMenorEdadException;
+import ar.edu.utn.frre.dacs.sample.services.ClienteService;
 
 /**
  * 
@@ -62,6 +64,10 @@ public class ClienteBean implements Serializable {
 	@Inject
 	private ClienteDao clienteDao;
 	
+	@Inject
+	private ClienteService clienteService;
+	
+	
 	// Getters/Setters --------------------------------------------------------
 	
 	@Named("listaClientes")
@@ -75,10 +81,15 @@ public class ClienteBean implements Serializable {
 	// Actions ----------------------------------------------------------------
 
     public void create() {
-    	clienteDao.create(cliente);
-        String message = String.format("Se ha creado el cliente con DNI: %d exitosamente.", cliente.getDni()); 
-        facesContext.addMessage(null, new FacesMessage(message));
-        this.cliente = new Cliente();
+    	try {
+			clienteService.createClienteSiEsMayorEdad(cliente);
+	        String message = String.format("Se ha creado el cliente con DNI: %d exitosamente.", cliente.getDni()); 
+	        facesContext.addMessage(null, new FacesMessage(message));
+	        this.cliente = new Cliente();
+		} catch (ClienteMenorEdadException e) {
+	        String message = String.format("El cliente es menor de edad, debe tener: %d.", e.getMayoriaEdad()); 
+	        facesContext.addMessage(null, new FacesMessage(message));
+		}
     }
 	
 }
