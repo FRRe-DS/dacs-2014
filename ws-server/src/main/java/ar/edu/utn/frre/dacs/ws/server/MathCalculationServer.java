@@ -1,7 +1,7 @@
 /*
  * (C) Copyright 2014 
  *
- * Univesidad Tecnológica Nacional - Facultad Regional Resistencia.
+ * Univesidad Tecnolï¿½gica Nacional - Facultad Regional Resistencia.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 package ar.edu.utn.frre.dacs.ws.server;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 
@@ -30,6 +31,9 @@ import javax.jws.WebService;
 @WebService
 public interface MathCalculationServer {
 	@WebMethod
-	int sum(int a, int b);
+	int sum(@WebParam(name="a")
+			int a, 
+			@WebParam(name="b")
+			int b);
 	
 }

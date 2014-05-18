@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="template.xhtml">
+
+	<ui:define name="header">
+		<h2>Desarrollo de Aplicaciones Cliente-Servidor</h2>
+		<h3>JAX-WS Client</h3>
+	</ui:define>
+    <ui:define name="content">
+        <h:messages />
+        <h:form id="sample">
+            <h:panelGrid columns="2">
+                <h:outputLabel for="a">A:</h:outputLabel>
+                <h:inputText id="a" value="#{webServiceClient.a}" />
+
+                <h:outputLabel for="b">B:</h:outputLabel>
+                <h:inputText id="b" value="#{webServiceClient.b}" />
+                
+                <h:outputLabel for="result">Result:</h:outputLabel>
+                <h:outputText id="result" value="#{webServiceClient.result}" />                
+            </h:panelGrid>
+
+            <h:commandButton 
+            	action="#{webServiceClient.execute()}"
+                value="Llamar al Web Service">
+                <f:ajax 
+                	execute="@form"
+                	render="sample:result" 
+                />	
+            </h:commandButton>
+        </h:form>
+    </ui:define>
+</ui:composition>

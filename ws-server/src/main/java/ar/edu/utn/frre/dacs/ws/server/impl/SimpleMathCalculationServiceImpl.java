@@ -1,7 +1,7 @@
 /*
  * (C) Copyright 2014 
  *
- * Univesidad Tecnológica Nacional - Facultad Regional Resistencia.
+ * Univesidad Tecnolï¿½gica Nacional - Facultad Regional Resistencia.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,11 @@ import ar.edu.utn.frre.dacs.ws.server.MathCalculationServer;
  */
 @Stateless
 @Local(MathCalculationServer.class)
-@WebService(endpointInterface = "ar.edu.utn.frre.dacs.ws.server.MathCalculationServer")
+@WebService(
+		portName = "MathCalculationPort",
+        serviceName = "MathCalculationService",
+        targetNamespace = "http://www.frre.utn.edu.ar/wsdl",		
+		endpointInterface = "ar.edu.utn.frre.dacs.ws.server.MathCalculationServer")
 public class SimpleMathCalculationServiceImpl implements MathCalculationServer {
 
 	@Override
